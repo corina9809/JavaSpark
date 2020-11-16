@@ -14,12 +14,18 @@ public class Basic {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> lines = sc.textFile("data.txt");
+
+
+
         JavaRDD<Integer> lineLengths = lines.map(s -> s.length());
         int totalLength = lineLengths.reduce((a, b) -> a + b);
         System.out.println("length: " + totalLength);
 
         List<Integer> data = Arrays.asList(1, 2, 3, 4, 5);
         JavaRDD<Integer> distData = sc.parallelize(data);
+
+        JavaRDD<Integer> mappedRDD = distData.map(val -> (int)Math.round(val));
+        mappedRDD.collect().forEach(System.out::println);
 
     }
 }
