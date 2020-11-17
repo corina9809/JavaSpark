@@ -50,7 +50,7 @@ public class Main1 {
 
 
         // Filter example
-        JavaRDD<String> toyotaData = irisData.filter(str -> str.contains("versicolor"));
+        JavaRDD<String> toyotaData = irisData.filter(str -> str.contains("HOLDER"));
         System.out.println("Versicolor word counts : " + toyotaData.count());
         System.out.println("Spark Operations : FILTER");
         for (String s : toyotaData.take(11)) {
