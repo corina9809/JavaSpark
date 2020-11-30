@@ -3,7 +3,9 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.*;
 //import org.apache.spark.sql.DataFrame;
+import scala.collection.Iterator;
 import scala.collection.immutable.Seq;
+import scala.collection.mutable.ArrayBuffer;
 
 
 public class AvroExample {
@@ -28,15 +30,18 @@ public class AvroExample {
 
         dr.load("src/main/data/zipcodes.avro").getRows(1,3);
 
-        dr.load("src/main/data/zipcodes.avro").getRows(1,3).iterator().next();
+        dr.load("src/main/data/zipcodes.avro").getRows(1,5).iterator().next();
+
+
+        for (Iterator iterator = dr.load("src/main/data/zipcodes.avro").getRows(1,5).iterator(); iterator.hasNext(); ) {
+
+            //ArrayBuffer ab = (ArrayBuffer) iterator.next();
+
+            System.out.println(iterator.next());
+        }
 
 
         int test1 = 7878;
-
-// Saves the subset of the Avro records read in
-       /* df.filter($"age > 5").write()
-                .format("com.databricks.spark.avro")
-                .save("/tmp/output"); */
 
 
     }
